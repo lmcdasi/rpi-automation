@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<garage>
+    <bluetooth>
+        <uuid></uuid>
+    </bluetooth>
+    <mqtt>
+        <uri>
+            <name>tcp://localhost:1883</name>
+        	<type>0</type>    
+        </uri>
+        <id>Garage Door</id>
+        <clean_session></clean_session>
+        <timeout></timeout>
+        <keep_alive></keep_alive>
+    </mqtt>
+    <magneticsensor>
+        <close>
+            <pin>GPIO_0</pin>
+            <enabled>true</enabled>
+        </close>
+        <open>
+            <pin>GPIO_2</pin>
+            <enabled>false</enabled>
+        </open>
+    </magneticsensor>
+    <relay>
+        <bltoutpin>GPIO_07</bltoutpin>
+        <installed>true</installed>
+    </relay>
+    <delay>6000</delay>
+</garage>

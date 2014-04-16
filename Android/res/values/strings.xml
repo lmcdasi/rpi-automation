@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">HomeAutomation</string>
+    <string name="hello_world">Welcome to Home Automation Tool</string>
+    <string name="action_settings">Action Settings</string>
+	<string name="garage_door">Garage Door</string>
+</resources>
