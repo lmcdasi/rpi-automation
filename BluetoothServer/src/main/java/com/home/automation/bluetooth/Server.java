@@ -11,6 +11,7 @@ import javax.microedition.io.StreamConnection;
 import javax.microedition.io.StreamConnectionNotifier;
 
 import com.home.automation.common.config.GarageConfiguration;
+import com.home.automation.common.mqtt.client.AsyncMqttClient;
 
 public class Server extends Thread {
 	private static final Logger logger = Logger.getLogger(Server.class.getCanonicalName());
@@ -72,7 +73,11 @@ public class Server extends Thread {
 		}
 	}
 	
-	public static void main(String[] args) {	
+	public static void main(String[] args) {
+		logger.info("Async connect request towards MQTT server");
+		AsyncMqttClient mqttClient = AsyncMqttClient.getInstance();
+		mqttClient.connectAsync();
+		
 		new Server().start();
 	}
 }
