@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cloud>
+    <keystore>
+        <file>your_jks</file>
+        <passwd>jks_passwd</passwd>
+    </keystore>
+    <storetype>JKS</storetype>
+    <cloudproto>TLS</cloudproto>
+    <port>server_port</port>
+    <home>
+        <url>/home/automation</url>
+        <discovery>/discover</discovery>
+        <on>/turnon</on>
+        <off>/turnoff</off>
+    </home>
+</cloud>
