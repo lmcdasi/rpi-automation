@@ -2,13 +2,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.home.automation.common</groupId>
 	<artifactId>HomeAutomationCommon</artifactId>
-	<version>1.0</version>
+	<version>${home.automation.common.version}</version>
   	<name>Common java code of Home Automation</name>
 
-	<!-- parent>
+	<parent>
 		<groupId>com.home.automation</groupId>
 		<artifactId>HomeAutomation</artifactId>
 		<version>1.0</version>
 		<relativePath>../parent/pom.xml</relativePath>
-	</parent -->
+	</parent>
 </project>

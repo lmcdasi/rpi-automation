@@ -1,29 +1,59 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.home.automation.bluetooth.server</groupId>
 	<artifactId>BluetoothServer</artifactId>
 	<packaging>jar</packaging>
-  
-    <parent>
-    	<groupId>com.home.automation</groupId>
-    	<artifactId>HomeAutomation</artifactId>
-    	<version>1.0</version>
-    	<relativePath>../parent/pom.xml</relativePath>
+	<version>${home.automation.bluetooth.server}</version>
+
+	<parent>
+		<groupId>com.home.automation</groupId>
+		<artifactId>HomeAutomation</artifactId>
+		<version>1.0</version>
+		<relativePath>../parent/pom.xml</relativePath>
 	</parent>
-	
-    <dependencies>
+
+	<dependencies>
 		<dependency>
 			<groupId>com.home.automation.common</groupId>
 			<artifactId>HomeAutomationCommon</artifactId>
-			<version>1.0</version>
+			<version>${home.automation.common.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.home.automation.garage</groupId>
 			<artifactId>GarageAutomation</artifactId>
 			<version>1.0</version>
 		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>com.home.automation.bluetooth.Server</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

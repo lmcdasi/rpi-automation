@@ -1,49 +1,51 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.home.automation.garage</groupId>
 	<artifactId>GarageAutomation</artifactId>
 	<packaging>jar</packaging>
 	<name>Garage Automation</name>
-	
+	<version>${home.automation.garage.version}</version>
+
 	<parent>
-    	<groupId>com.home.automation</groupId>
-    	<artifactId>HomeAutomation</artifactId>
-    	<version>1.0</version>
-    	<relativePath>../parent/pom.xml</relativePath>
+		<groupId>com.home.automation</groupId>
+		<artifactId>HomeAutomation</artifactId>
+		<version>1.0</version>
+		<relativePath>../parent/pom.xml</relativePath>
 	</parent>
-  
+
 	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
-		
 		<dependency>
 			<groupId>com.pi4j</groupId>
 			<artifactId>pi4j-core</artifactId>
-			<version>0.0.5</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>com.home.automation.config</groupId>
-		    <artifactId>HomeAutomationConfig</artifactId>
-		    <version>1.0</version>
+			<groupId>com.home.automation.config</groupId>
+			<artifactId>HomeAutomationConfig</artifactId>
+			<version>${home.automation.config.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.home.automation.common</groupId>
 			<artifactId>HomeAutomationCommon</artifactId>
-			<version>1.0</version>
+			<version>${home.automation.common.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
-			<version>3.2.1</version>
 			<scope>runtime</scope>
-		</dependency>            
-  </dependencies>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+	</dependencies>
 </project>

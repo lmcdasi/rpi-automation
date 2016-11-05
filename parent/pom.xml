@@ -1,21 +1,28 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.home.automation</groupId>
-    <artifactId>HomeAutomation</artifactId>
-    <packaging>pom</packaging>
-    <version>1.0</version>
-    <name>Home Automation Parent Project</name>
+	<groupId>com.home.automation</groupId>
+	<artifactId>HomeAutomation</artifactId>
+	<packaging>pom</packaging>
+	<version>1.0</version>
+	<name>Home Automation Parent Project</name>
 
-    <!-- modules>
-        <module>garage-door</module>
-        <module>sensor-tag</module>
-    </modules -->
-    
-    <profiles>
+	<!-- modules> <module>garage-door</module> <module>sensor-tag</module> </modules -->
+
+	<properties>
+		<home.automation.common.version>1.0</home.automation.common.version>
+		<home.automation.config.version>1.0</home.automation.config.version>
+		<home.automation.bluetooth.server>1.0</home.automation.bluetooth.server>
+		<home.automation.garage.version>1.0</home.automation.garage.version>
+		<com.home.automation.cloud.version>1.0</com.home.automation.cloud.version>
+		
+		<maven-compiler-plugin.version>3.0</maven-compiler-plugin.version>
+		<maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
+		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+	</properties>
+	<profiles>
 		<profile>
 			<id>jdk</id>
 			<activation>
@@ -24,37 +31,51 @@
 			<properties>
 				<jdk>C:/Program Files/Java/jdk1.8.0_112</jdk>
 			</properties>
-    	</profile>
+		</profile>
 	</profiles>
 
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <configuration>
-                    	<verbose>true</verbose>
-                    	<fork>true</fork>
-                    	<executable>${jdk}/bin/javac</executable>
-                        <source>1.7</source>
-                        <target>1.7</target>
-                    </configuration>
-                </plugin>
-                <plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<configuration>
-						<jvm>${jdk}/bin/java</jvm>
-						<forkMode>once</forkMode>
-					</configuration>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+    				<version>${maven-compiler-plugin.version}</version>
 				</plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
-	
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>${maven-jar-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-plugin.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<verbose>true</verbose>
+					<fork>true</fork>
+					<executable>${jdk}/bin/javac</executable>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<jvm>${jdk}/bin/java</jvm>
+					<forkMode>once</forkMode>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 	<repositories>
-	    <repository>
+		<repository>
 			<id>spring-milestones</id>
 			<url>http://repo.springsource.org/libs-milestone/</url>
 		</repository>
@@ -67,58 +88,96 @@
 				<updatePolicy>always</updatePolicy>
 			</snapshots>
 		</repository>
-		
+
 		<repository>
 			<id>pyx4j-web-snapshot</id>
-            <url>http://repository.pyx4j.com/maven2-snapshot</url>
-            <snapshots>
-            	<enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </repository>
+			<url>http://repository.pyx4j.com/maven2-snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</repository>
+
+		<repository>
+			<id>maven-restlet</id>
+			<name>Public online Restlet repository</name>
+			<url>http://maven.restlet.org</url>
+		</repository>
 	</repositories>
 
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-		<dependency>
-			<groupId>com.pi4j</groupId>
-			<artifactId>pi4j-core</artifactId>
-			<version>0.0.5</version>
-			<exclusions>
-				<exclusion>
-					<groupId>com.pi4j</groupId>
-					<artifactId>pi4j-native</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-        <dependency>
-			<groupId>net.sf.bluecove</groupId>
-			<artifactId>bluecove</artifactId>
-			<version>2.1.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.bluecove</groupId>
-			<artifactId>bluecove-gpl</artifactId>
-			<version>2.1.1-SNAPSHOT</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.bluecove</groupId>
-			<artifactId>bluecove-bluez</artifactId>
-			<version>2.1.1-SNAPSHOT</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.paho</groupId>
-			<artifactId>mqtt-client</artifactId>
-			<version>0.2.1</version>
-		</dependency>
-    </dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>3.8.1</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.pi4j</groupId>
+				<artifactId>pi4j-core</artifactId>
+				<version>0.0.5</version>
+				<exclusions>
+					<exclusion>
+						<groupId>com.pi4j</groupId>
+						<artifactId>pi4j-native</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.bluecove</groupId>
+				<artifactId>bluecove</artifactId>
+				<version>2.1.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.bluecove</groupId>
+				<artifactId>bluecove-gpl</artifactId>
+				<version>2.1.1-SNAPSHOT</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.bluecove</groupId>
+				<artifactId>bluecove-bluez</artifactId>
+				<version>2.1.1-SNAPSHOT</version>
+				<scope>runtime</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.eclipse.paho</groupId>
+				<artifactId>mqtt-client</artifactId>
+				<version>0.2.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.restlet.jee</groupId>
+				<artifactId>org.restlet</artifactId>
+				<version>2.3.4</version>
+			</dependency>
+			<dependency>
+				<groupId>org.restlet.jse</groupId>
+				<artifactId>org.restlet.ext.gson</artifactId>
+				<version>2.3.4</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-configuration</groupId>
+				<artifactId>commons-configuration</artifactId>
+				<version>1.10</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-collections</groupId>
+				<artifactId>commons-collections</artifactId>
+				<version>3.2.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>1.2.17</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>
