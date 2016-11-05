@@ -30,7 +30,7 @@ public class DeviceTurnOn extends ServerResource {
 
 			AuthenticateDevice authDev = new AuthenticateDevice(req.getAccessToken());
 			if (authDev.authDevice() == AuthenticateState.SUCCESS) {
-/*				garageDoor = DoorRelay.getDoorRelayInstance();
+				garageDoor = DoorRelay.getDoorRelayInstance();
 
 				switch (garageDoor.getDoorState()) {
 				case OPENED:
@@ -39,7 +39,7 @@ public class DeviceTurnOn extends ServerResource {
 				default:
 					DoorState executionState = garageDoor.activateRelay();
 					logger.debug("ExecutionState: " + executionState);
-				}*/
+				}
 
 				this.getResponse().setStatus(Status.SUCCESS_OK);
 				logger.info("Success - door activated - acess token:" + req.getAccessToken());
@@ -47,7 +47,7 @@ public class DeviceTurnOn extends ServerResource {
 		} catch (IOException ioex) {
 			this.getResponse().setStatus(Status.CLIENT_ERROR_EXPECTATION_FAILED);
 			logger.error("IOException", ioex);
-		} /*catch (InterruptedException iex) {
+		} catch (InterruptedException iex) {
 			this.getResponse().setStatus(Status.CLIENT_ERROR_EXPECTATION_FAILED);
 			logger.error("IOException", iex);
 		} catch (NoSuchFieldException nsfex) {
@@ -58,7 +58,7 @@ public class DeviceTurnOn extends ServerResource {
 			logger.error("IllegalArgumentException", iaex);
 		} catch (IllegalAccessException iaex) {
 			logger.error("IllegalAccessException", iaex);
-		}*/
+		}
 	}
 
 	@Get
