@@ -4,4 +4,6 @@
 
 dependency-reduced-pom.xml
 
+SSLServer/src/main/resources/test.sh
+
 /target/
