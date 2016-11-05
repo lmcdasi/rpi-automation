@@ -52,5 +52,6 @@ public class TestParseConfigFile extends TestCase {
     		logger.info("GPIO PIN used for Door Relay Sensor: " + myGarageConfig.getRelayGpioPin());
     	}
     	logger.info("Door delay movement timer: " + myGarageConfig.getDoorMovementTimer());
+    	logger.info("SSL port no: " + myGarageConfig.getSslPortNo());
     }
 }
