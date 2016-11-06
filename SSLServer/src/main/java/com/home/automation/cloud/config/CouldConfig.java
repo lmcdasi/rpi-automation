@@ -63,8 +63,8 @@ public class CouldConfig {
 	public String getServerPort() {
 		return serverPort;
 	}
-	public void setServerURL(XMLConfiguration config) {
-		serverPort = new String (config.getString("url", "https://localhost:9443"));
+	public void setServerPort(XMLConfiguration config) {
+		serverPort = new String (config.getString("port", "443"));
 	}
 	
 	public String getHomeURL() {
@@ -106,7 +106,7 @@ public class CouldConfig {
 				setKeyPasswd(config);
 				setStoreType(config);
 				setCloudProto(config);
-				setServerURL(config);
+				setServerPort(config);
 				setHomeURL(config);
 				setTurnOn(config);
 				setTurnOff(config);

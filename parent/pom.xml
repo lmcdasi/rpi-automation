@@ -12,11 +12,11 @@
 	<!-- modules> <module>garage-door</module> <module>sensor-tag</module> </modules -->
 
 	<properties>
-		<home.automation.common.version>1.0</home.automation.common.version>
-		<home.automation.config.version>1.0</home.automation.config.version>
-		<home.automation.bluetooth.server>1.0</home.automation.bluetooth.server>
-		<home.automation.garage.version>1.0</home.automation.garage.version>
-		<com.home.automation.cloud.version>1.0</com.home.automation.cloud.version>
+		<home.automation.common.version>2.0</home.automation.common.version>
+		<home.automation.config.version>2.0</home.automation.config.version>
+		<home.automation.bluetooth.server>2.0</home.automation.bluetooth.server>
+		<home.automation.garage.version>2.0</home.automation.garage.version>
+		<com.home.automation.cloud.version>2.0</com.home.automation.cloud.version>
 		
 		<maven-compiler-plugin.version>3.0</maven-compiler-plugin.version>
 		<maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>

@@ -1,9 +1,9 @@
 package com.home.automation.common.mqtt.client;
 
 import java.sql.Timestamp;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttAsyncClient;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
@@ -30,14 +30,17 @@ public class AsyncMqttClient implements MqttCallback {
 	
 	public boolean connectAsync() {
 		try {
-			myClient = new MqttAsyncClient(myGarageConfig.getServerURI(), myGarageConfig.getMqttClientId());
-			
-	        if(logger.isLoggable(Level.FINEST)) {
-	        	logger.fine("Connecting to " + myGarageConfig.getServerURI() + " with client ID " + myClient.getClientId());
+			if(logger.isDebugEnabled()) {
+	        	logger.debug("Connecting to " + myGarageConfig.getServerURI() + " with conf Id: " + myGarageConfig.getMqttClientId());
 	        }
 			
-	        myClient.connect();
+			myClient = new MqttAsyncClient(myGarageConfig.getServerURI(), myGarageConfig.getMqttClientId());
 			
+	        if(logger.isDebugEnabled()) {
+	        	logger.debug("With client ID " + myClient.getClientId());
+	        }
+	        
+	        myClient.connect();		
 			myClient.setCallback(this);
 		} catch (MqttException e) {
 			// TODO Auto-generated catch block
@@ -58,19 +61,19 @@ public class AsyncMqttClient implements MqttCallback {
         try {
 			myClient.publish(topicName, message, null, null);
 		} catch (MqttException ex) {
-			logger.log(Level.SEVERE, "MQTT publis exception: ", ex);
+			logger.log(Level.FATAL, "MQTT publis exception: ", ex);
 		}
     }
 
 	@Override
 	public void connectionLost(Throwable clex) {
-		logger.log(Level.SEVERE, "Connection Lost Exception: ", clex);
+		logger.fatal("Connection Lost Exception: ", clex);
 		
 		if(!myClient.isConnected()) {
 			try {
 				myClient.connect();
 			} catch (MqttException e) {
-				logger.log(Level.SEVERE, "Unable to reconnect - mqtt services are down: ", e);
+				logger.fatal("Unable to reconnect - mqtt services are down: ", e);
 			}
 		}
 	}
@@ -80,16 +83,16 @@ public class AsyncMqttClient implements MqttCallback {
 		try {
             logger.info("Delivery complete callback: Publish Completed " + token.getMessage());
 		} catch (Exception ex) {
-            logger.severe("Exception in delivery complete callback: " + ex);
+            logger.fatal("Exception in delivery complete callback: " + ex);
 		}	
 	}
 
 	@Override
 	public void messageArrived(String arg0, MqttMessage message) throws Exception {
 		String time = new Timestamp(System.currentTimeMillis()).toString();
-		if(logger.isLoggable(Level.FINE)) {
-			logger.fine("Receive message from MQTT server at: " + time);
-			logger.fine("Content: " + message.getPayload().toString());
+		if(logger.isDebugEnabled()) {
+			logger.debug("Receive message from MQTT server at: " + time);
+			logger.debug("Content: " + message.getPayload().toString());
 		}
 	}
 }

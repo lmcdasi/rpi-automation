@@ -143,6 +143,8 @@ public class GarageConfiguration {
 					setMagnetSensorClosePin(config);
 					setMagnetSensorOpenPin(config);
 					setDoorMovementTimer(config);
+					setServerURI(config);
+					setMqttClientId(config);
 					setSslPortNo(config);
 					
 				} catch (ConfigurationException e) {

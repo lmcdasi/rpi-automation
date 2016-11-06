@@ -42,7 +42,7 @@ public class SSLServerApplication extends Application implements Runnable {
 
         logger.debug("In SSLServerApplication.createInboundRoot");
 
-        router.attach("/discover", DeviceDiscovery.class);
+        router.attach(CouldConfig.getCouldConfiguration().getDiscover(), DeviceDiscovery.class);
         router.attach(CouldConfig.getCouldConfiguration().getTurnOn(), DeviceTurnOn.class);
         router.attach(CouldConfig.getCouldConfiguration().getTurnOff(), DeviceTurnOff.class);
                
