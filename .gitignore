@@ -7,5 +7,6 @@ dependency-reduced-pom.xml
 SSLServer/src/main/resources/test.sh
 Config/src/main/resources/HomeAutomationConfiguration.xml.save
 SSLServer/src/main/resources/CloudConfig.xml.save
+SSLServer/src/main/resources/serverX.jks
 
 /target/
