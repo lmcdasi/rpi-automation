@@ -9,8 +9,21 @@
     <port>server_port</port>
     <home>
         <url>/home/automation</url>
-        <discovery>/discover</discovery>
-        <on>/turnon</on>
-        <off>/turnoff</off>
+        <discover>/discover</discover>
+        <appliances>
+            <appliance>
+               	<id>101</id>
+               	<description>garage door relay</description>
+               	<enabled>true</enabled>
+               	<name>garage</name>
+               	<manufacturer>diy</manufacturer>
+               	<model>rpi</model>
+               	<version>1.0</version>
+               	<actions>
+                	<action>/turnon</action>
+   	    			<action>/turnoff</action>
+       			</actions>
+            </appliance>
+        </appliances>
     </home>
 </cloud>

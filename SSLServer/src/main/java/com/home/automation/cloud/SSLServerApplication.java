@@ -1,5 +1,7 @@
 package com.home.automation.cloud;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
 import org.apache.log4j.Logger;
@@ -15,7 +17,8 @@ import org.restlet.data.Protocol;
 import org.restlet.routing.Router;
 import org.restlet.util.Series;
 
-import com.home.automation.cloud.config.CouldConfig;
+import com.home.automation.cloud.config.Appliance;
+import com.home.automation.cloud.config.CloudConfig;
 import com.home.automation.cloud.devices.DeviceDiscovery;
 import com.home.automation.cloud.devices.DeviceTurnOff;
 import com.home.automation.cloud.devices.DeviceTurnOn;
@@ -33,7 +36,6 @@ public class SSLServerApplication extends Application implements Runnable {
 	
     public SSLServerApplication() {
     	logger.debug("In ModspaceRestApplication.ctor");
-        //this.setInboundRoot(this.createInboundRoot());
     }
     
     @Override
@@ -42,9 +44,20 @@ public class SSLServerApplication extends Application implements Runnable {
 
         logger.debug("In SSLServerApplication.createInboundRoot");
 
-        router.attach(CouldConfig.getCouldConfiguration().getDiscover(), DeviceDiscovery.class);
-        router.attach(CouldConfig.getCouldConfiguration().getTurnOn(), DeviceTurnOn.class);
-        router.attach(CouldConfig.getCouldConfiguration().getTurnOff(), DeviceTurnOff.class);
+        router.attach(CloudConfig.getCloudConfiguration().getDiscover(), DeviceDiscovery.class);
+        
+        List<Appliance> appliances = CloudConfig.getCloudConfiguration().getAppliances();
+        for (Appliance appliance : appliances) {
+        	ArrayList<String> actions = appliance.getActions();
+        	for (String action : actions) {
+        		if (action.contains("turnon")) {
+        			router.attach(action, DeviceTurnOn.class);
+        		}
+        		if (action.contains("turnoff")) {
+        			router.attach(action, DeviceTurnOff.class);
+        		}
+        	}
+        }
                
         return router;
     }
@@ -72,17 +85,17 @@ public class SSLServerApplication extends Application implements Runnable {
 	public void run() {
         Component component = new Component();
  
-        Server server = component.getServers().add(Protocol.HTTPS, Integer.parseInt(CouldConfig.getCouldConfiguration().getServerPort())); 
+        Server server = component.getServers().add(Protocol.HTTPS, Integer.parseInt(CloudConfig.getCloudConfiguration().getServerPort())); 
         Series<Parameter> parameters = server.getContext().getParameters();
         parameters.add("sslContextFactory", "org.restlet.engine.ssl.DefaultSslContextFactory");
         
-        parameters.add("keyStorePath", CouldConfig.getCouldConfiguration().getKeyStore());
-        parameters.add("keyStorePassword", CouldConfig.getCouldConfiguration().getKeyPasswd());
-        parameters.add("keyPassword", CouldConfig.getCouldConfiguration().getKeyPasswd());
-        parameters.add("keyStoreType", CouldConfig.getCouldConfiguration().getStoreType());
-        parameters.add("protocol", CouldConfig.getCouldConfiguration().getCloudProto());
+        parameters.add("keyStorePath", CloudConfig.getCloudConfiguration().getKeyStore());
+        parameters.add("keyStorePassword", CloudConfig.getCloudConfiguration().getKeyPasswd());
+        parameters.add("keyPassword", CloudConfig.getCloudConfiguration().getKeyPasswd());
+        parameters.add("keyStoreType", CloudConfig.getCloudConfiguration().getStoreType());
+        parameters.add("protocol", CloudConfig.getCloudConfiguration().getCloudProto());
     
-        component.getDefaultHost().attach(CouldConfig.getCouldConfiguration().getHomeURL(), new SSLServerApplication());
+        component.getDefaultHost().attach(CloudConfig.getCloudConfiguration().getHomeURL(), this);
 
         try {
 			component.start();
